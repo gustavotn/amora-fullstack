@@ -1,0 +1,170 @@
+.Card{
+    border: 2px solid #a855f7;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.Card:hover {
+    background-color: #D9D9D9;
+    color: #0D0D12;
+
+    .price{
+    color: #0D0D12;
+    }
+}
+
+.card-txt{
+    margin: 5px;;
+}
+
+.icone-adicionar-foto{
+  color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 36px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price{
+  font-weight: bold;
+  margin: 0;
+  font-size: 25px;
+  color: #A278E9;
+}
+
+
+.section{
+  margin-bottom: 30px;
+}
+
+.section-text{
+    text-align: start;
+    font-size: 14px;
+    line-height: 0.5;
+    margin-bottom: 0.5rem;
+}
+
+input{
+  background: #0e0e10;
+  border: 1px solid #a855f7;
+  padding: 10px;
+  border-radius: 8px;
+  width: 92%;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 12px;
+}
+
+textarea{
+  background: #0e0e10;
+  border: 1px solid #a855f7;
+  padding: 10px;
+  border-radius: 8px;
+  width: 92%;
+  color: white;
+}
+
+.titulo-4{
+    margin-bottom: 0.5rem
+}
+
+.arte-nomes{
+  background: #DBDBDB;
+  border: none;
+  padding: 10px;
+  border-radius: 0;
+  width: 92%;
+  margin-bottom: 10px;
+  color: #000000;
+  font-size: 12px;
+  text-align: center;
+}
+
+.preview-arte{
+    background: rgb(26, 26, 29);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px 0px;
+    height: 215px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Page {
+    background: #0D0D12;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.Logo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Card {
+    border: 2px solid #a855f7;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.UploadBox {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.UploadIcon {
+    background: #1a1a1d;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.Button {
+    background: #1a1a1d;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.Divider {
+    border-color: #ff2e9e;
+    margin: 10px 0;
+}
+
+.PreviewCard {
+    border: 2px solid #ff2e9e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    background: #0e0e10;
+}
