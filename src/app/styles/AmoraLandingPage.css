@@ -1,0 +1,226 @@
+.amora-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #000000, #1A1A1A);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.amora-logo {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amora-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.amora-highlight {
+  color: #ff2e9e;
+}
+
+.amora-description {
+  text-align: center;
+  font-size: 14px;
+  margin: 20px 0;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+.amora-button {
+  background: #ff2e9e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(255, 46, 158, 0.5);
+}
+
+.amora-qrcode-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.amora-qrcode {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, #0ff 0%, #00f 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.amora-qrcode-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.amora-qrcode-text {
+  font-size: 12px;
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.3;
+}
+
+.amora-qrcode-description {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.amora-como-funciona {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 320px;
+  color: #fff;
+}
+
+.amora-como-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.amora-como-seta {
+  font-size: 18px;
+  display: inline-block;
+  transform: rotate(45deg);
+  margin-left: 5px;
+}
+
+.amora-etapa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 2px;
+}
+
+.amora-etapa-icone {
+  background-color: #ff2e9e;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amora-etapa strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.amora-etapa p {
+  font-size: 12px;
+  margin: 0;
+  color: #ccc;
+}
+
+.amora-hero-desktop {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1d1d1d, #000);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.amora-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amora-social a img {
+  width: 24px;
+  margin-right: 12px;
+}
+
+.amora-logo {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.amora-conteudo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+  gap: 2rem;
+}
+
+.amora-texto h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.amora-texto .destaque {
+  color: #ff2c83;
+  font-weight: 700;
+}
+
+.amora-btn-principal, .amora-btn-secundario {
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.amora-btn-principal {
+  background: #ff2c83;
+  color: #fff;
+}
+
+.amora-btn-secundario {
+  background: #d8f0ff;
+  color: #000;
+}
+
+/* .amora-imagem-centro img,
+.amora-qr img {
+  max-width: 25vw;
+} */
+
+.amora-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section1-desk{
+    width: 30vw;
+}
