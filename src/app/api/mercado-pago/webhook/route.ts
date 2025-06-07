@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendMail } from "../../mail/sendMail";
 
 // O Mercado Pago envia notificações via POST
 export async function POST(req: NextRequest) {
@@ -16,6 +17,11 @@ export async function POST(req: NextRequest) {
     console.log("Webhook recebido do Mercado Pago:");
     console.log("Query:", { id, topic });
     console.log("Body:", body);
+
+    // Chama o sendMail sem await, usando callback
+    sendMail({
+      to: `estevaobresolin@gmail.com`,
+    });
 
     // Sempre responda 200 OK para o Mercado Pago saber que recebeu
     return NextResponse.json({ received: true });
