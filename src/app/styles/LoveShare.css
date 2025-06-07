@@ -19,6 +19,15 @@
     margin: 5px;;
 }
 
+.Card--selected {
+  background-color: #D9D9D9;
+    color: #0D0D12;
+
+    .price{
+    color: #0D0D12;
+    }
+}
+
 .icone-adicionar-foto{
   color: #ffffff;
   border-radius: 50%;
@@ -57,7 +66,8 @@ input{
   border: 1px solid #a855f7;
   padding: 10px;
   border-radius: 8px;
-  width: 92%;
+  /* width: 92%; */
+  width: 100%;
   margin-bottom: 10px;
   color: white;
   font-size: 12px;
@@ -72,7 +82,8 @@ textarea{
   border: 1px solid #a855f7;
   padding: 10px;
   border-radius: 8px;
-  width: 92%;
+  /* width: 92%; */
+  width: 100%;
   color: white;
 
   @media screen and (min-width: 600px) {
@@ -158,6 +169,10 @@ textarea{
     padding: 10px;
     text-align: center;
     margin: 10px 0;
+
+    @media screen and (min-width: 600px) {
+        padding: 0;
+    }
 }
 
 .UploadBox {

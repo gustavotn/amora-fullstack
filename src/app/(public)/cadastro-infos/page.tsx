@@ -35,9 +35,10 @@ const LoveSharePage = () => {
   const [relationshipStart, setRelationshipStart] = useState('');
   const [message, setMessage] = useState('');
   const [timeTogether, setTimeTogether] = useState<{ years: number; months: number; days: number } | null>(null);
-
+  
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<1 | 2>(1);
 
   useEffect(() => {
     const time = calculateTimeTogether(relationshipStart);
@@ -83,7 +84,7 @@ const LoveSharePage = () => {
 
         <h2 className="Title">Compartilhe Seu<br /> AMOR</h2>
 
-        <div className="Card">
+        {/* <div className="Card">
           <p className='card-txt'>1 ano, 1 foto e sem música</p>
           <p className='price'>R$ 9,99</p>
         </div>
@@ -91,23 +92,52 @@ const LoveSharePage = () => {
         <div className="Card">
           <p className='card-txt'>Pra sempre, 5 fotos e com música</p>
           <p className='price'>R$ 29,99</p>
+        </div> */}
+
+        <div
+          className={`Card${selectedPlan === 1 ? ' Card--selected' : ''}`}
+          onClick={() => setSelectedPlan(1)} >
+          <p className='card-txt'>1 ano, 1 foto e sem música</p>
+          <p className='price'>R$ 9,99</p>
+        </div>
+
+        <div
+          className={`Card${selectedPlan === 2 ? ' Card--selected' : ''}`}
+          onClick={() => setSelectedPlan(2)} >
+          <p className='card-txt'>Pra sempre, 5 fotos e com música</p>
+          <p className='price'>R$ 29,99</p>
         </div>
 
         <div className="UploadBox">
           <div className="UploadIcon">
-            {imagePreview ? (
+            {/* {imagePreview ? (
               <img src={imagePreview} alt="Upload Preview" style={{ width: '45px', height: '45px', borderRadius: '50%' }} />
-            ) : (
+            ) : ( */}
               <>
                 <Image src={img1} alt="Upload" style={{ width: '45px', height: 'auto' }} />
                 <div className='icone-adicionar-foto'>+</div>
               </>
-            )}
+            {/* )} */}
           </div>
-          <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} id="fileInput" />
-          <label htmlFor="fileInput">
-            <button className="Button">Escolha a foto</button>
-          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="Button"
+            style={{
+              display: 'inline-block',
+              width: '100%',
+              textAlign: 'center',
+              padding: '12px 12px',
+              border: 'none',
+              borderRadius: '8px',
+              // background: '#ff2e9e',
+              color: '#fff',
+              fontWeight: 600,
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}
+          />
         </div>
 
         <div className='section'>
@@ -128,7 +158,7 @@ const LoveSharePage = () => {
               onChange={handleDateChange}
               maxLength={10}
             />
-            <FaCalendarAlt style={{ position: 'absolute', right: 10, top: 12 }} />
+            {/* <FaCalendarAlt style={{ position: 'absolute', right: 10, top: 12 }} /> */}
           </div>
 
           <p className='section-text'>Mensagem Fofa</p>
@@ -154,7 +184,7 @@ const LoveSharePage = () => {
 
           <div className='preview-arte'>
             {imagePreview ? (
-              <img src={imagePreview} alt="Arte Preview" style={{ width: '100px', height: '100px', borderRadius: '8px' }} />
+              <img src={imagePreview} alt="Arte Preview" style={{ borderRadius: '8px' }} />
             ) : (
               <FaImage size={48} />
             )}
@@ -178,7 +208,7 @@ const LoveSharePage = () => {
 
         <button
           className="Button"
-          style={{ background: '#ff2e9e', marginTop: '20px' }}
+          style={{ background: '#ff2e9e', marginTop: '20px', width: '100%' }}
           onClick={() => createMercadoPagoCheckout({
             id: 'gustavo.tn@outlook.com',
             email: 'gustavo.tn@outlook.com',
@@ -210,19 +240,34 @@ const LoveSharePage = () => {
 
             <div className="UploadBox">
               <div className="UploadIcon">
-                {imagePreview ? (
+                {/* {imagePreview ? (
                   <img src={imagePreview} alt="Upload Preview" style={{ width: '45px', height: '45px', borderRadius: '50%' }} />
-                ) : (
+                ) : ( */}
                   <>
                     <Image src={img1} alt="Upload" style={{ width: '45px', height: 'auto' }} />
                     <div className='icone-adicionar-foto'>+</div>
                   </>
-                )}
+                {/* )} */}
               </div>
-              <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} id="fileInput" />
-              <label htmlFor="fileInput">
-                <button className="Button">Escolha a foto</button>
-              </label>
+              <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="Button"
+              style={{
+                display: 'inline-block',
+                width: '100%',
+                textAlign: 'center',
+                padding: '12px 12px',
+                border: 'none',
+                borderRadius: '8px',
+                // background: '#ff2e9e',
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: '16px',
+                cursor: 'pointer'
+              }}
+              />
             </div>
             <div className='section'>
               <p className='section-text'>Nome do casal</p>
@@ -253,12 +298,20 @@ const LoveSharePage = () => {
               ></textarea>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ width: '47%' }} className="Card">
+              <div
+                style={{ width: '47%', cursor: 'pointer' }}
+                className={`Card${selectedPlan === 1 ? ' Card--selected' : ''}`}
+                onClick={() => setSelectedPlan(1)}
+              >
                 <p className='card-txt'>1 ano, 1 foto e sem música</p>
                 <p className='price'>R$ 9,99</p>
               </div>
 
-              <div style={{ width: '47%' }} className="Card">
+              <div
+                style={{ width: '47%', cursor: 'pointer' }}
+                className={`Card${selectedPlan === 2 ? ' Card--selected' : ''}`}
+                onClick={() => setSelectedPlan(2)}
+              >
                 <p className='card-txt'>Pra sempre, 5 fotos e com música</p>
                 <p className='price'>R$ 29,99</p>
               </div>
@@ -283,7 +336,7 @@ const LoveSharePage = () => {
 
               <div className='preview-arte'>
                 {imagePreview ? (
-                  <img src={imagePreview} alt="Arte Preview" style={{ width: '100px', height: '100px', borderRadius: '8px' }} />
+                  <img src={imagePreview} alt="Arte Preview" style={{  borderRadius: '8px' }} />
                 ) : (
                   <FaImage size={48} />
                 )}
@@ -313,7 +366,7 @@ const LoveSharePage = () => {
                 email: 'gustavo.tn@outlook.com',
                 items: [
                   {
-                    id: '1',
+                    id: selectedPlan.toString(),
                     title: 'Plano 1 foto',
                     quantity: 1,
                     unit_price: 9.99,
