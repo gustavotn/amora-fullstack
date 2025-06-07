@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Sempre responda 200 OK para o Mercado Pago saber que recebeu
-    return NextResponse.json({ received: true });
+    return NextResponse.json({ received: true, message: "Teste" });
   } catch (error) {
     console.error("Erro no webhook:", error);
     return NextResponse.json({ error: "Erro ao processar webhook" }, { status: 500 });
