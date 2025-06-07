@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { useRouter } from "next/navigation";
-import { Items } from "mercadopago/dist/clients/commonTypes";
 
 interface CheckoutDataProps {
     id: string,
@@ -13,7 +12,7 @@ const useMercadoPago = () => {
   const router = useRouter();
 
   useEffect(() => {
-    initMercadoPago(process.env.ERCADO_PAGO_PUBLIC_KEY!);
+    initMercadoPago(process.env.NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY!);
   }, []);
 
   async function createMercadoPagoCheckout(checkoutData: CheckoutDataProps) {
