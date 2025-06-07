@@ -1,9 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Preference } from "mercadopago";
 import mpClient from "@/app/lib/mercado-pago";
+import { Items } from "mercadopago/dist/clients/commonTypes";
+
+const plans : Items[] = [
+  {
+    id: '1',
+    title: 'Plano 1 foto',
+    quantity: 1,
+    unit_price: 9.99,
+  },
+  {
+    id: '2',
+    title: 'Plano 2 fotos e música',
+    quantity: 1,
+    unit_price: 29.99,
+  },
+] as const
 
 export async function POST(req: NextRequest) {
-  const { id, userEmail, items } = await req.json();
+  const { id, userEmail, planId } = await req.json();
+
+  if (planId !== '1' && planId !== '2') {
+    throw new Error('Plan does not exist')
+  }
+
+  const items = plans.filter(p => p.id == planId)
 
   try {
     const preference = new Preference(mpClient);

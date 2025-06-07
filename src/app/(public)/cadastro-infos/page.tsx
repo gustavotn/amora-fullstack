@@ -212,14 +212,7 @@ const LoveSharePage = () => {
           onClick={() => createMercadoPagoCheckout({
             id: 'gustavo.tn@outlook.com',
             email: 'gustavo.tn@outlook.com',
-            items: [
-              {
-                id: '1',
-                title: 'Plano 1 foto',
-                quantity: 1,
-                unit_price: 9.99,
-              }
-            ]
+            planId: selectedPlan.toString()
           })}
         >
           {/* <a href="/visualizar-site" style={{ color: '#fff', textDecoration: 'none' }}>
@@ -364,14 +357,7 @@ const LoveSharePage = () => {
               onClick={() => createMercadoPagoCheckout({
                 id: 'gustavo.tn@outlook.com',
                 email: 'gustavo.tn@outlook.com',
-                items: [
-                  {
-                    id: selectedPlan.toString(),
-                    title: 'Plano 1 foto',
-                    quantity: 1,
-                    unit_price: 9.99,
-                  }
-                ]
+                planId: selectedPlan.toString()
               })}
             >
               CRIE MINHA PAGINA

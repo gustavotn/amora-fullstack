@@ -6,7 +6,7 @@ import { Items } from "mercadopago/dist/clients/commonTypes";
 interface CheckoutDataProps {
     id: string,
     email: string,
-    items: Items[]
+    planId: string
 }
 
 const useMercadoPago = () => {
