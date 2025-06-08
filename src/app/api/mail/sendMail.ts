@@ -30,22 +30,7 @@ export async function sendMail({ to }: sendMailProps) {
 
     await addLog({ message: 'passou aqui 4 ', error: false })
 
-    transporter.sendMail(mailOptions, async (error, info) => {
-        if (error) {
-            await addMessage({
-                from: (mailOptions.from || '').toString(),
-                to: (mailOptions.to || '').toString(),
-                subject: mailOptions.subject,
-                text: mailOptions.text?.toString(),
-                error: error.toString()
-            })
-        } else {
-            await addMessage({
-                from: (mailOptions.from || '').toString(),
-                to: (mailOptions.to || '').toString(),
-                subject: mailOptions.subject,
-                text: mailOptions.text?.toString()
-            })
-        }
+    transporter.sendMail(mailOptions, (error, info) => {
+        addLog({ message: !!error ? error.message : 'tudo dominado', error: !!error })
     });
 }
