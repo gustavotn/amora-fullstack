@@ -8,9 +8,6 @@ interface sendMailProps {
 }
 
 export async function sendMail({ to }: sendMailProps) {
-    await addLog({ message: 'passou aqui 1 ', error: false })
-    await addLog({ message: 'passou aqui 2 ' + process.env.EMAIL_USER + ' - ' + process.env.EMAIL_PASS, error: false })
-
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -19,8 +16,6 @@ export async function sendMail({ to }: sendMailProps) {
         }
     });
 
-    await addLog({ message: 'passou aqui 3 ', error: false })
-
     const mailOptions: Options = {
         from: process.env.EMAIL_USER,
         to,
@@ -28,9 +23,13 @@ export async function sendMail({ to }: sendMailProps) {
         text: 'Texto do corpo do e-mail',
     };
 
-    await addLog({ message: 'passou aqui 4 ', error: false })
-
     const info = await transporter.sendMail(mailOptions);
 
-    await addLog({ message: JSON.stringify(info), error: false })
+    await addMessage({
+        from: mailOptions.from?.toString(),
+        to: mailOptions.to?.toString(),
+        text: mailOptions.text?.toString()
+    })
+
+    await addLog({ message: JSON.stringify(info) })
 }
