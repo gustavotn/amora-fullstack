@@ -1,11 +1,12 @@
 import nodemailer from 'nodemailer'
 import { Options } from 'nodemailer/lib/mailer';
+import { addMessage } from '../firebase/repositories/messages-repository';
 
 interface sendMailProps {
     to: string
 }
 
-export function sendMail({ to } : sendMailProps ) {
+export function sendMail({ to }: sendMailProps) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -14,7 +15,7 @@ export function sendMail({ to } : sendMailProps ) {
         }
     });
 
-    const mailOptions : Options = {
+    const mailOptions: Options = {
         from: process.env.EMAIL_USER,
         to,
         subject: 'Amora',
@@ -23,9 +24,20 @@ export function sendMail({ to } : sendMailProps ) {
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.log('Erro: ' + error);
+            addMessage({
+                from: (mailOptions.from || '').toString(),
+                to: (mailOptions.to || '').toString(),
+                subject: mailOptions.subject,
+                text: mailOptions.text?.toString(),
+                error: error.toString()
+            })
         } else {
-            console.log('E-mail enviado: ' + info.response);
+            addMessage({
+                from: (mailOptions.from || '').toString(),
+                to: (mailOptions.to || '').toString(),
+                subject: mailOptions.subject,
+                text: mailOptions.text?.toString()
+            })
         }
     });
 }
