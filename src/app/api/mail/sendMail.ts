@@ -30,13 +30,11 @@ export async function sendMail({ to }: sendMailProps) {
 
     await addLog({ message: 'passou aqui 4 ', error: false })
 
-    var infoMail;
-    var errorMail;
+    var errorMail = '';
 
     transporter.sendMail(mailOptions, (error, info) => {
-        infoMail = info
-        errorMail = error
+        errorMail = error ? error.message : ''
     });
 
-    await addLog({ message: infoMail, error: errorMail })
+    await addLog({ message: errorMail ? errorMail : '', error: !!errorMail })
 }
