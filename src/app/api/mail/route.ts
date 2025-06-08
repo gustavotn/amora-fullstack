@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
     const to = req.nextUrl.searchParams.get('mail')
 
     if (to) {
-        sendMail({ to })
+        await sendMail({ to })
     } else {
         return Response.json({ message: 'mail is required' }, { status: 401 })
     }
