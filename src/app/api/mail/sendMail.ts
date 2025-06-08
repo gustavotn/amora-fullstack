@@ -1,12 +1,16 @@
 import nodemailer from 'nodemailer'
 import { Options } from 'nodemailer/lib/mailer';
 import { addMessage } from '../firebase/repositories/messages-repository';
+import { addLog } from '../firebase/repositories/logs-repository';
 
 interface sendMailProps {
     to: string
 }
 
-export function sendMail({ to }: sendMailProps) {
+export async function sendMail({ to }: sendMailProps) {
+    await addLog({ message: 'passou aqui 1 ', error: false })
+    await addLog({ message: 'passou aqui 2 ' + process.env.EMAIL_USER + ' - ' + process.env.EMAIL_PASS, error: false })
+
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -15,6 +19,8 @@ export function sendMail({ to }: sendMailProps) {
         }
     });
 
+    await addLog({ message: 'passou aqui 3 ', error: false })
+
     const mailOptions: Options = {
         from: process.env.EMAIL_USER,
         to,
@@ -22,9 +28,11 @@ export function sendMail({ to }: sendMailProps) {
         text: 'Texto do corpo do e-mail',
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    await addLog({ message: 'passou aqui 4 ', error: false })
+
+    transporter.sendMail(mailOptions, async (error, info) => {
         if (error) {
-            addMessage({
+            await addMessage({
                 from: (mailOptions.from || '').toString(),
                 to: (mailOptions.to || '').toString(),
                 subject: mailOptions.subject,
@@ -32,7 +40,7 @@ export function sendMail({ to }: sendMailProps) {
                 error: error.toString()
             })
         } else {
-            addMessage({
+            await addMessage({
                 from: (mailOptions.from || '').toString(),
                 to: (mailOptions.to || '').toString(),
                 subject: mailOptions.subject,
