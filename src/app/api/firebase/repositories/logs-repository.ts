@@ -1,8 +1,8 @@
 import database from '../database'
 
 interface Message {
-  message: string
-  error: boolean
+  message: any
+  error: any
 }
 
 export async function addLog(data: Message) {
