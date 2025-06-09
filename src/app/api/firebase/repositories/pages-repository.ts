@@ -13,7 +13,10 @@ interface Page {
 }
 
 export async function addPage(data: Page) {
-    await database.collection('pages').add(data);
+    const ref = await database.collection('pages').add(data);
+    const doc = await ref.get()
+
+    return doc.data()?.id
 }
 
 export async function changeToPaid(pageId: string) {

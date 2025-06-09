@@ -25,12 +25,12 @@ export async function POST(req: NextRequest) {
 
     const id = body.title + nanoid(4)
 
-    await addPage({
+    const pageId = await addPage({
         ...body,
         startedAt: Timestamp.fromDate(new Date(body.startedAt)),
         id,
         paid: false
     })
 
-    return Response.json({ message: 'success' }, { status: 201 })
+    return Response.json({ pageId }, { status: 201 })
 }
