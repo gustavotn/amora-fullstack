@@ -3,8 +3,38 @@
 import { FaCalendarAlt } from 'react-icons/fa';
 import Image from 'next/image';
 import img1 from '../../assets/img1.png';
+import { useState, useEffect } from 'react';
+
+function youtubeToEmbed(url: string): string {
+  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/;
+  const match = url.match(regex);
+  if (match && match[1]) {
+    return `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+  }
+  return '';
+}
 
 const RelationshipPage = () => {
+  const [music, setMusic] = useState<string | null>(null);
+  const [coupleImage, setCoupleImage] = useState<any>(img1);
+  const [relationshipTime, setRelationshipTime] = useState<string>('');
+  // const [relationshipHour, setRelationshipHour] = useState<string>('');
+  const [date1, setDate1] = useState<string>('');
+  // const [date2, setDate2] = useState<string>('');
+
+  useEffect(() => {
+    fetch('/api/firebase/repositories/pages-repository')
+      .then(res => res.json())
+      .then(data => {
+        setMusic(data.music);
+        setCoupleImage(data.coupleImage || img1);
+        setRelationshipTime(data.relationshipTime);
+        // setRelationshipHour(data.relationshipHour);
+        setDate1(data.date1);
+        // setDate2(data.date2);
+      });
+  }, []);
+
   return (
     <div className="bg-neutral-900 text-white min-h-screen p-5 font-sans text-center">
       <div className="italic flex items-center justify-center mb-2">
@@ -17,19 +47,20 @@ const RelationshipPage = () => {
       </h3>
 
       <div className="bg-neutral-800 rounded-lg p-2 my-5 inline-block">
-        {/* Pode colocar um player real ou manter como ilustração */}
-        <iframe 
-          width="240" 
-          height="150" 
-          src="https://www.youtube.com/embed/WC-iBaKL59Q?autoplay=1&si=pb0PIzJCNwidt2--" 
-          title="YouTube video player" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        ></iframe>
+        {music && (
+          <iframe
+            width="240"
+            height="150"
+            src={youtubeToEmbed(music)}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        )}
       </div>
 
       <div className="my-5">
         <Image 
-          src={img1} 
+          src={coupleImage} 
           alt="Casal" 
           className="w-full max-w-[250px] rounded-xl my-5 mx-auto" 
         />
@@ -37,22 +68,23 @@ const RelationshipPage = () => {
 
       <div className="my-5 text-sm">
         Juntos há
-        <div className="mt-1 font-bold">1 anos, 11 meses, 29 dias</div>
-        <div className="font-bold">8 horas, 54 segundos</div>
+        <div className="mt-1 font-bold">{relationshipTime}</div>
+        {/* <div className="font-bold">{relationshipHour}</div> */}
       </div>
 
       <div className="flex justify-around mt-5">
         <div className="flex items-center border border-purple-500 rounded-lg p-2 text-sm">
           <FaCalendarAlt className="mr-1" />
-          23/08/2022
+          {date1}
         </div>
-        <div className="flex items-center border border-purple-500 rounded-lg p-2 text-sm">
+        {/* <div className="flex items-center border border-purple-500 rounded-lg p-2 text-sm">
           <FaCalendarAlt className="mr-1" />
-          23/08/2021
-        </div>
+          {date2}
+        </div> */}
       </div>
     </div>
   );
 };
 
 export default RelationshipPage;
+

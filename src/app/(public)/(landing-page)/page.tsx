@@ -41,7 +41,7 @@ const AmoraLandingPage = () => {
         </p>
 
         <button className="amora-button">
-           <a href="/Main" style={{ color: '#fff', textDecoration: 'none' }}>
+           <a href="/cadastro-infos" style={{ color: '#fff', textDecoration: 'none' }}>
             CRIE MINHA PAGINA
           </a>
         </button>
