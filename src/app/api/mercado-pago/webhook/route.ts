@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendMail } from "../../mail/sendMail";
+import { changeToPaid, getPage } from "../../firebase/repositories/pages-repository";
 
 // O Mercado Pago envia notificações via POST
 export async function POST(req: NextRequest) {
@@ -19,14 +20,21 @@ export async function POST(req: NextRequest) {
     console.log("Body:", body);
 
     // Chama o sendMail sem await, usando callback
-    sendMail({
-      to: `estevaobresolin@gmail.com`,
+    // sendMail({
+    //   to: `estevaobresolin@gmail.com`,
+    // });
+
+    await changeToPaid(id!)
+    const page = await getPage(id!)
+
+    await sendMail({
+      to: page.data()["email"],
     });
 
     // Sempre responda 200 OK para o Mercado Pago saber que recebeu
-    return NextResponse.json({ received: true, message: "Teste" });
+    return NextResponse.json({ received: true, message: id });
   } catch (error) {
     console.error("Erro no webhook:", error);
-    return NextResponse.json({ error: "Erro ao processar webhook" }, { status: 500 });
+    return NextResponse.json({ error: "Erro ao processar webhook. " + error }, { status: 500 });
   }
 }

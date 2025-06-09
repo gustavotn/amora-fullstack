@@ -1,23 +1,34 @@
+import { Timestamp } from 'firebase-admin/firestore'
 import database from '../database'
 
-export interface Page {
-    //id: string
+interface Page {
+    id: string
     email: string
+    title: string
+    message: string
+    musicUrl?: string
+    startedAt: Timestamp
+    planId: '1' | '2'
+    paid: boolean
 }
 
 export async function addPage(data: Page) {
-  const docRef = await database.collection('pages').add(data);
+    await database.collection('pages').add(data);
 }
 
-export async function getPages() : Promise<Page[]> {
-    const snapshot = await database.collection('pages').get()
+export async function changeToPaid(pageId: string) {
+    const doc = await getPage(pageId)
+    await doc.ref.update({ paid: true });
+}
 
-    const pages: Page[] = [];
+export async function getPage(pageId: string) {
+    var snapshot = await database.collection('pages').where('id', '==', pageId).get()
 
-    snapshot.forEach(doc => {
-        const page = doc.data() as Page
-        pages.push(page)
-    })
+    const pages = snapshot.docs.map(doc => doc.data());
 
-    return pages
+    if (snapshot.docs.length === 0) {
+        throw new Error('Page not found')
+    }
+
+    return snapshot.docs[0]
 }
