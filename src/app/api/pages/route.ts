@@ -12,6 +12,12 @@ export interface PageRequest {
     planId: '1' | '2'
 }
 
+function parseDateBr(dateStr: string): Date {
+  // Espera formato dd/mm/aaaa
+  const [day, month, year] = dateStr.split('/').map(Number);
+  return new Date(year, month - 1, day);
+}
+
 export async function POST(req: NextRequest) {
     const body: PageRequest = await req.json()
 
@@ -27,7 +33,7 @@ export async function POST(req: NextRequest) {
 
     const pageId = await addPage({
         ...body,
-        startedAt: Timestamp.fromDate(new Date(body.startedAt)),
+        startedAt: Timestamp.fromDate(parseDateBr(body.startedAt)),
         id,
         paid: false
     })

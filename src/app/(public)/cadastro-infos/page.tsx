@@ -337,17 +337,43 @@ const LoveSharePage = () => {
                     transition: 'opacity 0.2s'
                   }}
                   disabled={!validateEmail(inputEmail)}
-                  onClick={() => {
+                  onClick={async () => {
                     if (!validateEmail(inputEmail)) {
                       setEmailError('Digite um e-mail válido');
                       return;
                     }
-                    setShowModal(false);
-                    createMercadoPagoCheckout({
-                      id: inputEmail,
+
+                    // Monta os dados para enviar ao backend
+                    const pageData = {
                       email: inputEmail,
-                      planId: selectedPlan.toString()
-                    });
+                      title: coupleName,
+                      message: message,
+                      musicUrl: music,
+                      startedAt: relationshipStart, // ajuste se necessário para o formato esperado
+                      planId: selectedPlan.toString(),
+                      paid: false
+                    };
+
+                    try {
+                      // Chama o backend para criar a página
+                      const response = await fetch('/api/pages', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(pageData)
+                      });
+                      const { id } = await response.json();
+
+                      setShowModal(false);
+
+                      // Agora chama o checkout com o id retornado
+                      createMercadoPagoCheckout({
+                        id,
+                        email: inputEmail,
+                        planId: selectedPlan.toString()
+                      });
+                    } catch (err) {
+                      setEmailError('Erro ao criar página. Tente novamente.');
+                    }
                   }}
                 >
                   Continuar
@@ -606,17 +632,43 @@ const LoveSharePage = () => {
                     transition: 'opacity 0.2s'
                   }}
                   disabled={!validateEmail(inputEmail)}
-                  onClick={() => {
+                  onClick={async () => {
                     if (!validateEmail(inputEmail)) {
                       setEmailError('Digite um e-mail válido');
                       return;
                     }
-                    setShowModal(false);
-                    createMercadoPagoCheckout({
-                      id: inputEmail,
+
+                    // Monta os dados para enviar ao backend
+                    const pageData = {
                       email: inputEmail,
-                      planId: selectedPlan.toString()
-                    });
+                      title: coupleName,
+                      message: message,
+                      musicUrl: music,
+                      startedAt: relationshipStart, // ajuste se necessário para o formato esperado
+                      planId: selectedPlan.toString(),
+                      paid: false
+                    };
+
+                    try {
+                      // Chama o backend para criar a página
+                      const response = await fetch('/api/pages', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(pageData)
+                      });
+                      const { id } = await response.json();
+
+                      setShowModal(false);
+
+                      // Agora chama o checkout com o id retornado
+                      createMercadoPagoCheckout({
+                        id,
+                        email: inputEmail,
+                        planId: selectedPlan.toString()
+                      });
+                    } catch (err) {
+                      setEmailError('Erro ao criar página. Tente novamente.');
+                    }
                   }}
                 >
                   Continuar

@@ -15,7 +15,8 @@ interface Page {
 export async function addPage(data: Page) {
     const ref = await database.collection('pages').add(data);
     const doc = await ref.get()
-
+    console.log('doc.data()?.id', doc.data()?.id)
+    console.log('refref', ref)
     return doc.data()?.id
 }
 

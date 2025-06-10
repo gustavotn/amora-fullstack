@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mercadopago/sdk-react": "^1.0.3",
+    "dotenv": "^16.5.0",
     "firebase": "^11.9.0",
     "firebase-admin": "^13.4.0",
     "mercadopago": "^2.7.0",
