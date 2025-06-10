@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     if (!id || !topic) {
       return NextResponse.json({ error: "ID ou tipo não informados." }, { status: 400 });
     }
-
+ 
     await changeToPaid(id);
     const page = await getPage(id);
 
