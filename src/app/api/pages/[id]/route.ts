@@ -9,20 +9,21 @@ export async function GET(
     try {
         const { id } = await params;
 
-        const page = (await getPage(id)).data()
-
-        console.log(page["paid"])
+        const page = (await getPage(id)).data();
 
         if (!page["paid"]) {
-            return NextResponse.json({ message: 'Payment not found' }, { status: 401 })
+            return NextResponse.json({ message: 'Payment not found' }, { status: 401 });
         }
 
         return NextResponse.json({ 
-            ...page ,
-            startedAt: page["startedAt"].toDate()
-        })
+            ...page,
+            startedAt: page["startedAt"]?.toDate
+                ? page["startedAt"].toDate().toISOString()
+                : null
+        });
     }
     catch (error) {
-        return NextResponse.json({ message: error }, { status: 500 })
+        console.log("Error fetching page:", error);
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

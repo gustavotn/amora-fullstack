@@ -23,14 +23,15 @@ const RelationshipPage = () => {
   // const [date2, setDate2] = useState<string>('');
 
   useEffect(() => {
-    fetch('/api/firebase/repositories/pages-repository')
+    fetch('/api/pages/123')
       .then(res => res.json())
       .then(data => {
+        console.log('data', data);
         setMusic(data.music);
         setCoupleImage(data.coupleImage || img1);
         setRelationshipTime(data.relationshipTime);
         // setRelationshipHour(data.relationshipHour);
-        setDate1(data.date1);
+        // setDate1(data.date1);
         // setDate2(data.date2);
       });
   }, []);
