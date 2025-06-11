@@ -21,7 +21,7 @@ export async function sendMail({ to, id }: sendMailProps) {
         from: process.env.EMAIL_USER,
         to,
         subject: 'Amora',
-        text: 'Segue o link para acessar sua página: ' + process.env.NEXT_PUBLIC_URL + '/' + id,
+        text: 'Segue o link para acessar sua página: ' + 'https://amora-zeta.vercel.app/' + id,
     };
 
     const info = await transporter.sendMail(mailOptions);
