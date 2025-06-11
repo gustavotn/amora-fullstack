@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
 
     await sendMail({
       to: page.data()["email"],
+      id: page.data()["id"],
     });
 
     return NextResponse.json({ received: true, message: id });

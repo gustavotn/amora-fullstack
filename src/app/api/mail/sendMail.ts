@@ -4,10 +4,11 @@ import { addMessage } from '../firebase/repositories/messages-repository';
 import { addLog } from '../firebase/repositories/logs-repository';
 
 interface sendMailProps {
-    to: string
+    to: string,
+    id: string
 }
 
-export async function sendMail({ to }: sendMailProps) {
+export async function sendMail({ to, id }: sendMailProps) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -20,7 +21,7 @@ export async function sendMail({ to }: sendMailProps) {
         from: process.env.EMAIL_USER,
         to,
         subject: 'Amora',
-        text: 'Texto do corpo do e-mail',
+        text: 'Segue o link para acessar sua página: ' + process.env.NEXT_PUBLIC_URL + '/' + id,
     };
 
     const info = await transporter.sendMail(mailOptions);
