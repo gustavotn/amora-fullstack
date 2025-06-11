@@ -81,6 +81,12 @@ const LoveSharePage = () => {
     }
   };
 
+  const handleCoupleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const originalText = e.target.value;
+    const formattedText = originalText.replace(/\s+/g, '-');
+    setCoupleName(formattedText);
+  };
+
   // Navegação do carrossel
   const nextImage = () => setCarouselIndex((prev) => (prev + 1) % imagePreviews.length);
   const prevImage = () => setCarouselIndex((prev) => (prev - 1 + imagePreviews.length) % imagePreviews.length);
@@ -174,7 +180,7 @@ const LoveSharePage = () => {
             type='text'
             placeholder="Jorge e Jorgina (Sem Emojis)"
             value={coupleName}
-            onChange={(e) => setCoupleName(e.target.value)}
+            onChange={handleCoupleNameChange}
           />
 
           <p className='section-text'>Início do Relacionamento</p>
@@ -449,7 +455,7 @@ const LoveSharePage = () => {
                 type='text'
                 placeholder="Jorge e Jorgina (Sem Emojis)"
                 value={coupleName}
-                onChange={(e) => setCoupleName(e.target.value)}
+                onChange={handleCoupleNameChange}
               />
 
               <p className='section-text'>Início do Relacionamento</p>

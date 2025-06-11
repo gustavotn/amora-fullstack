@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { addPage, changeToPaid } from "../firebase/repositories/pages-repository"
+import { addPage } from "../firebase/repositories/pages-repository"
 import { nanoid } from "nanoid"
 import { Timestamp } from "firebase-admin/firestore"
 
@@ -8,6 +8,7 @@ export interface PageRequest {
     title: string
     message: string
     musicUrl?: string
+    coupleImage: string,
     startedAt: string
     planId: '1' | '2'
 }
@@ -29,7 +30,13 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: 'title is required' }, { status: 400 })
     }
 
-    const id = body.title + nanoid(4)
+    if (body.planId === '1') {
+        body.musicUrl = ''
+    }
+
+    const formattedTitle = body.title.replace(/\s+/g, '-');
+
+    const id = formattedTitle + nanoid(4)
 
     const pageId = await addPage({
         ...body,

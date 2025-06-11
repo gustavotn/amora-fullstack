@@ -7,6 +7,7 @@ interface Page {
     title: string
     message: string
     musicUrl?: string
+    coupleImage: string,
     startedAt: Timestamp
     planId: '1' | '2'
     paid: boolean
@@ -28,10 +29,6 @@ export async function changeToPaid(pageId: string) {
 export async function getPage(pageId: string) {
     console.log('pageId', pageId)
     var snapshot = await database.collection('pages').where('id', '==', pageId).get()
-    // console.log('snapshot', snapshot)
-
-    const pages = snapshot.docs.map(doc => doc.data());
-    //  console.log('pages', pages)
 
     if (snapshot.docs.length === 0) {
         throw new Error('Page not found')
