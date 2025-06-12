@@ -34,13 +34,11 @@ export async function sendMail({ to, id }: sendMailProps) {
             <p style="font-size: 16px; color: #555;">Sua página especial de casal já está no ar!</p>
           </center>
 
-
           <div style="text-align: center; margin: 30px 0;">
             <img src="${qrcode} alt="QR Code do Casal" width="150" style="margin-bottom: 15px;" />
-            <p style="font-size: 16px;">Escaneie o QR Code ou clique no botão abaixo para acessar sua página de amor com <strong>[nome do par]</strong>.</p>
-            <a href="[URL_PAGINA_CASAL]" style="display: inline-block; margin-top: 10px; background-color: #E91E63; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 8px;">✨ Ver nossa página ✨</a>
+            <p style="font-size: 16px;">Escaneie o QR Code ou clique no botão abaixo para acessar sua página de amor</strong>.</p>
+            <a href="${url}" style="display: inline-block; margin-top: 10px; background-color: #E91E63; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 8px;">✨ Ver nossa página ✨</a>
           </div>
-
 
           <hr style="border: none; border-top: 1px solid #eee;" />
           <div style="font-family: 'Arial', sans-serif; color: #666; padding: 20px;">
@@ -52,7 +50,7 @@ export async function sendMail({ to, id }: sendMailProps) {
 
           <center style="font-size: 12px; color: #aaa; margin-top: 30px;">
             Você recebeu este e-mail porque ativou uma página no Amora.<br>
-            <a href="https://appamora.com/privacidade" style="color: #aaa;">Política de Privacidade</a> • 
+            <a href="https://amorame.com.br/termos-de-uso" style="color: #aaa;">Política de Privacidade</a> • 
             <a href="mailto:contato@appamora.com" style="color: #aaa;">Contato</a>
           </center>
         `
