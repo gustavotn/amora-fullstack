@@ -37,7 +37,7 @@ const LoveSharePage = () => {
   const [message, setMessage] = useState('');
   const [music, setMusic] = useState('');
   const [timeTogether, setTimeTogether] = useState<{ years: number; months: number; days: number } | null>(null);
-  const [selectedPlan, setSelectedPlan] = useState<1 | 2>(1);
+  const [selectedPlan, setSelectedPlan] = useState<1 | 2>(2);
   
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
@@ -353,6 +353,10 @@ const LoveSharePage = () => {
                   }}
                   disabled={!validateEmail(inputEmail)}
                   onClick={async () => {
+                    if (imageFiles.length === 0) {
+                      setEmailError('Adicione ao menos uma foto!');
+                      return;
+                    }
                     if (!validateEmail(inputEmail)) {
                       setEmailError('Digite um e-mail válido');
                       return;
@@ -653,6 +657,10 @@ const LoveSharePage = () => {
                   }}
                   disabled={!validateEmail(inputEmail)}
                   onClick={async () => {
+                    if (imageFiles.length === 0) {
+                      setEmailError('Adicione ao menos uma foto!');
+                      return;
+                    }
                     if (!validateEmail(inputEmail)) {
                       setEmailError('Digite um e-mail válido');
                       return;

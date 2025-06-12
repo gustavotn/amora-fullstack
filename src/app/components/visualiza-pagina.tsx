@@ -2,8 +2,9 @@
 
 import { FaCalendarAlt } from 'react-icons/fa';
 import Image from 'next/image';
-import img1 from '../assets/img1.png';
 import { useState, useEffect } from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function youtubeToEmbed(url: string): string {
   const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/;
@@ -51,14 +52,14 @@ interface VisualizarPaginaProps {
 const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
     const [title, setTitle] = useState<string | null>(null);
     const [music, setMusic] = useState<string | null>(null);
-    const [coupleImage, setCoupleImage] = useState<any>(img1);
+    const [coupleImages, setCoupleImages] = useState<string[]>([]);
     const [message, setMessage] = useState<string>('');
     const [relationshipTime, setRelationshipTime] = useState<string>('');
     // const [relationshipHour, setRelationshipHour] = useState<string>('');
     const [date1, setDate1] = useState<string>('');
     // const [date2, setDate2] = useState<string>('');
     const [timeTogether, setTimeTogether] = useState<any>(null);
-    const [seconds, setSeconds] = useState(1200);
+    const [seconds, setSeconds] = useState(3457);
 
     useEffect(() => {
     fetch(`/api/pages/${slug}`)
@@ -67,7 +68,13 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
         setTitle(data.title);
         setDate1(formatDate(data.startedAt));
         setMusic(data.musicUrl);
-        setCoupleImage(data.coupleImage1Url || img1);
+        setCoupleImages([
+          data.coupleImage1Url,
+          data.coupleImage2Url,
+          data.coupleImage3Url,
+          data.coupleImage4Url,
+          data.coupleImage5Url,
+        ].filter(Boolean));
         setRelationshipTime(data.startedAt);
         setMessage(data.message || '');
         // Calcule o tempo juntos
@@ -105,14 +112,30 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
                </div>
             )}
             <div className="my-5">
-                <Image
-                    src={coupleImage}
-                    alt="Casal"
-                    unoptimized
-                    width={400}
-                    height={300}
-                    className="w-full max-w-[250px] rounded-xl my-5 mx-auto"
-                />
+                {coupleImages.length > 0 ? (
+                  <div style={{ width: 250, margin: 'auto' }}>
+                    <Carousel
+                      showThumbs={false}
+                      showStatus={false}
+                      infiniteLoop
+                      className="carousel"
+                    >
+                      {coupleImages.map((src, idx) => (
+                        <div key={idx}>
+                          <img
+                            src={src}
+                            alt={`Foto ${idx + 1}`}
+                            style={{ borderRadius: '8px', width: '100%', height: 'auto' }}
+                          />
+                        </div>
+                      ))}
+                    </Carousel>
+                  </div>
+                ) : (
+                  <div style={{ width: 250, margin: 'auto', height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#222', borderRadius: 8 }}>
+                    <span style={{ color: '#aaa' }}>Sem foto</span>
+                  </div>
+                )}
             </div>
             <div className="my-5 text-sm">
                 {message}
