@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 import { Options } from 'nodemailer/lib/mailer';
 import { addMessage } from '../firebase/repositories/messages-repository';
 import { addLog } from '../firebase/repositories/logs-repository';
+import QRCode from 'qrcode'
 
 interface sendMailProps {
     to: string,
@@ -17,11 +18,44 @@ export async function sendMail({ to, id }: sendMailProps) {
         }
     });
 
+    const url = "https://amorame.com.br/" + id
+
+    const qrcode = await QRCode.toDataURL(url);
+
     const mailOptions: Options = {
         from: process.env.EMAIL_USER,
         to,
         subject: 'Amora',
-        text: 'Segue o link para acessar sua página: ' + 'https://amora-zeta.vercel.app/' + id,
+        //text: 'Segue o link para acessar sua página: ' + 'https://amora-zeta.vercel.app/' + id,
+        html: `
+          <center>
+            <img src="https://appamora.com/assets/logo.png" alt="Logo Amora" width="120" style="margin-top: 20px;" />
+            <h1 style="font-family: 'Arial', sans-serif; color: #E91E63;">Parabéns! 💕</h1>
+            <p style="font-size: 16px; color: #555;">Sua página especial de casal já está no ar!</p>
+          </center>
+
+
+          <div style="text-align: center; margin: 30px 0;">
+            <img src="${qrcode} alt="QR Code do Casal" width="150" style="margin-bottom: 15px;" />
+            <p style="font-size: 16px;">Escaneie o QR Code ou clique no botão abaixo para acessar sua página de amor com <strong>[nome do par]</strong>.</p>
+            <a href="[URL_PAGINA_CASAL]" style="display: inline-block; margin-top: 10px; background-color: #E91E63; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 8px;">✨ Ver nossa página ✨</a>
+          </div>
+
+
+          <hr style="border: none; border-top: 1px solid #eee;" />
+          <div style="font-family: 'Arial', sans-serif; color: #666; padding: 20px;">
+            <p>O amor de vocês agora tem um cantinho só dele. 💘</p>
+            <p>Compartilhem esse link com quem quiserem, guardem como lembrança e deixem o sentimento crescer um pouquinho mais todos os dias. 🌷</p>
+            <p style="margin-top: 20px;">Com carinho,<br><strong>Equipe Amora 💖</strong></p>
+          </div>
+
+
+          <center style="font-size: 12px; color: #aaa; margin-top: 30px;">
+            Você recebeu este e-mail porque ativou uma página no Amora.<br>
+            <a href="https://appamora.com/privacidade" style="color: #aaa;">Política de Privacidade</a> • 
+            <a href="mailto:contato@appamora.com" style="color: #aaa;">Contato</a>
+          </center>
+        `
     };
 
     const info = await transporter.sendMail(mailOptions);

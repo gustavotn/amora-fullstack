@@ -17,11 +17,12 @@ function youtubeToEmbed(url: string): string {
 
 function formatDate(isoString: string | null): string {
   if (!isoString) return '';
-  const date = new Date(isoString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+
+  const date = new Date(isoString).toLocaleDateString('pt-BR', {
+    timeZone: 'UTC'
+  });
+  
+  return date;
 }
 
 function calculateTimeTogether(startDateStr: string) {
@@ -59,7 +60,7 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
     const [date1, setDate1] = useState<string>('');
     // const [date2, setDate2] = useState<string>('');
     const [timeTogether, setTimeTogether] = useState<any>(null);
-    const [seconds, setSeconds] = useState(3457);
+    const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
     fetch(`/api/pages/${slug}`)
@@ -85,10 +86,11 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds((prev) => prev + 1);
+      const now = new Date();
+      setSeconds(now.getSeconds());
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [date1]);
 
     return (
         <div className="bg-neutral-900 text-white min-h-screen p-5 font-sans text-center">
