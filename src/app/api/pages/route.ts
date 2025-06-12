@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
     const formattedTitle = body.title.replace(/\s+/g, '-');
 
     const id = formattedTitle + nanoid(4)
-
     const page = {
         email: body.email,
         title: body.title,

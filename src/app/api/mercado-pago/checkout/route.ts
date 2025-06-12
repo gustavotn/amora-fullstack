@@ -65,9 +65,9 @@ export async function POST(req: NextRequest) {
           installments: 12, // Número máximo de parcelas permitidas - calculo feito automaticamente
         },
         back_urls: {
-          success: 'https://amora-pi.vercel.app/',
-          failure: 'https://amora-pi.vercel.app/',
-          pending: 'https://amora-pi.vercel.app/'
+          success: 'https://www.amorame.com.br/',
+          failure: 'https://www.amorame.com.br/',
+          pending: 'https://www.amorame.com.br/'
         },
       },
     });

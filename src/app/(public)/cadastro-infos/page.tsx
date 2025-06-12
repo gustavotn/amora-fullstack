@@ -371,6 +371,10 @@ const LoveSharePage = () => {
                       message: message,
                       musicUrl: music,
                       coupleImage1: base64List[0] ?? '',
+                      coupleImage2: base64List[1] ?? '',
+                      coupleImage3: base64List[2] ?? '',
+                      coupleImage4: base64List[3] ?? '',
+                      coupleImage5: base64List[4] ?? '',
                       startedAt: relationshipStart, // ajuste se necessário para o formato esperado
                       planId: selectedPlan.toString(),
                       paid: false
@@ -674,8 +678,12 @@ const LoveSharePage = () => {
                       title: coupleName,
                       message: message,
                       musicUrl: music,
-                      coupleImage1: base64List[0] ?? '',
-                      startedAt: relationshipStart, // ajuste se necessário para o formato esperado
+                        coupleImage1: base64List[0] ?? '',
+                        coupleImage2: base64List[1] ?? '',
+                        coupleImage3: base64List[2] ?? '',
+                        coupleImage4: base64List[3] ?? '',
+                        coupleImage5: base64List[4] ?? '',
+                        startedAt: relationshipStart, // ajuste se necessário para o formato esperado
                       planId: selectedPlan.toString(),
                       paid: false
                     };
