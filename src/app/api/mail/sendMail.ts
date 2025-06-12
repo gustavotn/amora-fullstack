@@ -29,7 +29,6 @@ export async function sendMail({ to, id }: sendMailProps) {
         //text: 'Segue o link para acessar sua página: ' + 'https://amora-zeta.vercel.app/' + id,
         html: `
           <center>
-            <img src="https://appamora.com/assets/logo.png" alt="Logo Amora" width="120" style="margin-top: 20px;" />
             <h1 style="font-family: 'Arial', sans-serif; color: #E91E63;">Parabéns! 💕</h1>
             <p style="font-size: 16px; color: #555;">Sua página especial de casal já está no ar!</p>
           </center>
