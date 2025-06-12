@@ -67,7 +67,7 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
         setTitle(data.title);
         setDate1(formatDate(data.startedAt));
         setMusic(data.musicUrl);
-        setCoupleImage(data.coupleImage || img1);
+        setCoupleImage(data.coupleImage1Url || img1);
         setRelationshipTime(data.startedAt);
         setMessage(data.message || '');
         // Calcule o tempo juntos
@@ -108,6 +108,9 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
                 <Image
                     src={coupleImage}
                     alt="Casal"
+                    unoptimized
+                    width={400}
+                    height={300}
                     className="w-full max-w-[250px] rounded-xl my-5 mx-auto"
                 />
             </div>

@@ -17,6 +17,11 @@ export async function GET(
 
         return NextResponse.json({ 
             ...page,
+            coupleImage1Url: page["coupleImage1Url"],
+            coupleImage2Url: page["coupleImage2Url"],
+            coupleImage3Url: page["coupleImage3Url"],
+            coupleImage4Url: page["coupleImage4Url"],
+            coupleImage5Url: page["coupleImage5Url"],
             startedAt: page["startedAt"]?.toDate
                 ? page["startedAt"].toDate().toISOString()
                 : null

@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase-admin/firestore'
-import database from '../database'
+import { database } from '../firebase'
 
 interface Page {
     id: string
@@ -7,7 +7,11 @@ interface Page {
     title: string
     message: string
     musicUrl?: string
-    coupleImage: string,
+    coupleImage1Url: string
+    coupleImage2Url: string
+    coupleImage3Url: string
+    coupleImage4Url: string
+    coupleImage5Url: string
     startedAt: Timestamp
     planId: '1' | '2'
     paid: boolean

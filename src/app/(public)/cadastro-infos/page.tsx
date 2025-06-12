@@ -117,6 +117,15 @@ const LoveSharePage = () => {
     return /\S+@\S+\.\S+/.test(email);
   }
 
+  function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   if (isMobile) {
     return (
       <div className="Page">
@@ -349,12 +358,15 @@ const LoveSharePage = () => {
                       return;
                     }
 
+                    const base64List = await Promise.all(imageFiles.map(fileToBase64));
+
                     // Monta os dados para enviar ao backend
                     const pageData = {
                       email: inputEmail,
                       title: coupleName,
                       message: message,
                       musicUrl: music,
+                      coupleImage1: base64List[0] ?? '',
                       startedAt: relationshipStart, // ajuste se necessário para o formato esperado
                       planId: selectedPlan.toString(),
                       paid: false
@@ -646,12 +658,15 @@ const LoveSharePage = () => {
                       return;
                     }
 
+                    const base64List = await Promise.all(imageFiles.map(fileToBase64));
+
                     // Monta os dados para enviar ao backend
                     const pageData = {
                       email: inputEmail,
                       title: coupleName,
                       message: message,
                       musicUrl: music,
+                      coupleImage1: base64List[0] ?? '',
                       startedAt: relationshipStart, // ajuste se necessário para o formato esperado
                       planId: selectedPlan.toString(),
                       paid: false
