@@ -367,14 +367,16 @@ const LoveSharePage = () => {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(pageData)
                       });
-                      const { id } = await response.json();
+                      const { pageId } = await response.json();
+
+                      console.log('Página criada com sucesso:', pageId);
 
                       setShowModal(false);
 
                       // Agora chama o checkout com o id retornado
                       createMercadoPagoCheckout({
-                        id,
-                        email: inputEmail,
+                        id: pageId.toString(),
+                        email: inputEmail.toString(),
                         planId: selectedPlan.toString()
                       });
                     } catch (err) {
@@ -662,14 +664,15 @@ const LoveSharePage = () => {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(pageData)
                       });
-                      const { id } = await response.json();
+                      const { pageId } = await response.json();
 
+                      console.log('Página criada com sucesso:', pageId);
                       setShowModal(false);
 
                       // Agora chama o checkout com o id retornado
                       createMercadoPagoCheckout({
-                        id,
-                        email: inputEmail,
+                        id: pageId.toString(),
+                        email: inputEmail.toString(),
                         planId: selectedPlan.toString()
                       });
                     } catch (err) {

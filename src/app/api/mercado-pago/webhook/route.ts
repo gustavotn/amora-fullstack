@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
     const idFromQuery = searchParams.get("id");
     const topicFromQuery = searchParams.get("topic");
 
-    // Fallback: pega do body se não veio na query
     const id = idFromQuery || body?.data?.id;
     const topic = topicFromQuery || body?.type;
 
@@ -24,18 +23,50 @@ export async function POST(req: NextRequest) {
     if (!id || !topic) {
       return NextResponse.json({ error: "ID ou tipo não informados." }, { status: 400 });
     }
- 
-    await changeToPaid(id);
-    const page = await getPage(id);
 
-    await sendMail({
-      to: page.data()["email"],
-      id: page.data()["id"],
-    });
+   const payment = await getPayment(id);
+
+  if (!payment || !payment.status || payment.status !== "approved") {
+    console.log("Pagamento ainda não aprovado ou inválido:");
+    console.log(payment);
+    return NextResponse.json({ ignored: true });
+  }
+
+  const externalReference = payment.external_reference;
+
+  if (!externalReference) {
+    console.warn("Pagamento sem external_reference, aguardando novo webhook:");
+    console.log(payment);
+    return NextResponse.json({ error: "Pagamento sem referência externa" }, { status: 202 });
+  }
+
+  // Aqui o external_reference já deve ser confiável
+  await changeToPaid(externalReference); // <--- Use ele aqui
+
+  const page = await getPage(externalReference);
+
+  await sendMail({
+    to: page.data()["email"],
+    id: page.data()["id"],
+  });
 
     return NextResponse.json({ received: true, message: id });
   } catch (error) {
     console.error("Erro no webhook:", error);
     return NextResponse.json({ error: "Erro ao processar webhook. " + error }, { status: 500 });
   }
+}
+
+async function getPayment(id: string) {
+  const res = await fetch(`https://api.mercadopago.com/authorized_payments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.MERCADO_PAGO_ACCESS_TOKEN}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao buscar pagamento no Mercado Pago");
+  }
+
+  return await res.json();
 }

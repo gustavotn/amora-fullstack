@@ -20,7 +20,6 @@ const plans : Items[] = [
 
 export async function POST(req: NextRequest) {
   const { id, userEmail, planId } = await req.json();
-
   if (planId !== '1' && planId !== '2') {
     throw new Error('Plan does not exist')
   }
@@ -76,7 +75,7 @@ export async function POST(req: NextRequest) {
     if (!createdPreference.id) {
       throw new Error("No preferenceID");
     }
-
+    console.log("Preference created:", createdPreference);
     return NextResponse.json({
       preferenceId: createdPreference.id,
       initPoint: createdPreference.init_point,

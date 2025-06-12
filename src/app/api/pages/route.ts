@@ -45,5 +45,7 @@ export async function POST(req: NextRequest) {
         paid: false
     })
 
+    console.log('Page created with ID:', pageId)
+
     return Response.json({ pageId }, { status: 201 })
 }
