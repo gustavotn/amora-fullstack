@@ -113,6 +113,13 @@
   margin-left: 5px;
 }
 
+.amora-etapas {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 40px;
+}
+
 .amora-etapa {
   display: flex;
   flex-direction: column;
@@ -140,7 +147,7 @@
 }
 
 .amora-etapa p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
   color: #ccc;
 }

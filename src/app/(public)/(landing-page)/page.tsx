@@ -116,7 +116,38 @@ const AmoraLandingPage = () => {
 
           <div className="amora-qr section1-desk">
             <Image src={imgQrcode} alt="Upload" style={{ height: 'auto' }} />
-            <button className="amora-btn-secundario">COMO FUNCIONA</button>
+            {/* <button className="amora-btn-secundario">COMO FUNCIONA</button> */}
+          </div>
+        </div>
+
+        <div className="amora-etapas">
+          <div className="amora-etapa">
+            <Image src={iconeLapis} alt="Upload" style={{ width: '100px', height: 'auto' }} />
+
+              <strong>CRIE</strong>
+              <p>Informe os dados do seu relacionamento</p>
+          </div>
+
+          <div className="amora-etapa">
+            <Image src={iconeDinheiro} alt="Upload" style={{ width: '100px', height: 'auto' }} />
+
+              <strong>PAGUE</strong>
+              <p>Pagamento simples via PIX</p>
+          </div>
+
+          <div className="amora-etapa">
+            {/* <div className="amora-etapa-icone">📧</div> */}
+             <Image src={iconeEmail} alt="Upload" style={{ width: '100px', height: 'auto' }} />
+            
+              <strong>RECEBA</strong>
+              <p>Receba via e-mail um link exclusivo e um QR Code para acesso</p>
+          </div>
+
+          <div className="amora-etapa">
+            <Image src={iconePresente} alt="Upload" style={{ width: '100px', height: 'auto' }} />
+
+              <strong>PRESENTE</strong>
+              <p>Encante seu amor da melhor forma</p>
           </div>
         </div>
       </div>
