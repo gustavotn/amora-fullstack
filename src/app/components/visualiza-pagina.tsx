@@ -144,8 +144,7 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
                 Juntos há
                 {timeTogether ? (
                   <div className="mt-1 font-bold flex items-center justify-center gap-2">
-                    {timeTogether.years} anos {timeTogether.months} meses {timeTogether.days} dias
-                    {now.getHours()} horas, {now.getMinutes()} minutos, {now.getSeconds()} segundos
+                    {timeTogether.years} anos {timeTogether.months} meses {timeTogether.days} dias {now.getHours()}  horas, {now.getMinutes()} minutos, {now.getSeconds()} segundos 
                     <span style={{ marginLeft: 8, fontWeight: 'normal', fontSize: 14, color: '#aaa' }}>
                       {/* {now.getHours()} horas, {now.getMinutes()} minutos, {now.getSeconds()} segundos */}
                     </span>
