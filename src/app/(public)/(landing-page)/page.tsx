@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import '../../styles/AmoraLandingPage.css';
 import iconeLapis from '../../assets/icone-lapis.png';
 import iconeDinheiro from '../../assets/icone-dinheiro.png';
@@ -12,6 +13,7 @@ import Image from 'next/image';
 
 
 const AmoraLandingPage = () => {
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -103,10 +105,11 @@ const AmoraLandingPage = () => {
               UM PRESENTE <span className="destaque">INOVADOR</span><br />
               PARA SEU <span className="destaque">AMOR</span>
             </h2>
-            <button className="amora-btn-principal"> 
-              <a href="/cadastro-infos" style={{ color: '#fff', textDecoration: 'none' }}>
-            CRIE MINHA PAGINA
-            </a>
+            <button
+              className="amora-btn-principal"
+              onClick={() => router.push('/cadastro-infos')}
+            >
+              CRIE MINHA PAGINA
             </button>
           </div>
 

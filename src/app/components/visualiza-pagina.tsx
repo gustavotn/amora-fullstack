@@ -56,11 +56,9 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
     const [coupleImages, setCoupleImages] = useState<string[]>([]);
     const [message, setMessage] = useState<string>('');
     const [relationshipTime, setRelationshipTime] = useState<string>('');
-    // const [relationshipHour, setRelationshipHour] = useState<string>('');
     const [date1, setDate1] = useState<string>('');
-    // const [date2, setDate2] = useState<string>('');
     const [timeTogether, setTimeTogether] = useState<any>(null);
-    const [seconds, setSeconds] = useState(0);
+  const [now, setNow] = useState(new Date());
 
     useEffect(() => {
     fetch(`/api/pages/${slug}`)
@@ -86,11 +84,10 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const now = new Date();
-      setSeconds(now.getSeconds());
+      setNow(new Date());
     }, 1000);
     return () => clearInterval(interval);
-  }, [date1]);
+  }, []);
 
     return (
         <div className="bg-neutral-900 text-white min-h-screen p-5 font-sans text-center">
@@ -145,12 +142,15 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
             <div className="my-5 text-sm">
                 Juntos há
                 {timeTogether ? (
-              <div className="mt-1 font-bold flex items-center justify-center gap-2">
-                {timeTogether.years} anos {timeTogether.months} meses {timeTogether.days} dias {seconds} segundos
-              </div>
-            ) : (
-              <div className="mt-1 font-bold">--</div>
-            )}
+                  <div className="mt-1 font-bold flex items-center justify-center gap-2">
+                    {timeTogether.years} anos {timeTogether.months} meses {timeTogether.days} dias
+                    <span style={{ marginLeft: 8, fontWeight: 'normal', fontSize: 14, color: '#aaa' }}>
+                      {now.toLocaleTimeString('pt-BR')}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="mt-1 font-bold">--</div>
+                )}
             </div>
 
             <div className="flex justify-around mt-5">
