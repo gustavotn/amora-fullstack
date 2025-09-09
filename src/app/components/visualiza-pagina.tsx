@@ -55,10 +55,10 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
     const [music, setMusic] = useState<string | null>(null);
     const [coupleImages, setCoupleImages] = useState<string[]>([]);
     const [message, setMessage] = useState<string>('');
-    const [relationshipTime, setRelationshipTime] = useState<string>('');
+  const [relationshipTime, setRelationshipTime] = useState<string>('');
+  const [now, setNow] = useState(new Date());
     const [date1, setDate1] = useState<string>('');
     const [timeTogether, setTimeTogether] = useState<any>(null);
-  const [now, setNow] = useState(new Date());
 
     useEffect(() => {
     fetch(`/api/pages/${slug}`)
@@ -81,6 +81,7 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
         setTimeTogether(time);
       });
   }, [slug]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -144,8 +145,9 @@ const VisualizarPagina = ({ slug }: VisualizarPaginaProps) => {
                 {timeTogether ? (
                   <div className="mt-1 font-bold flex items-center justify-center gap-2">
                     {timeTogether.years} anos {timeTogether.months} meses {timeTogether.days} dias
+                    {now.getHours()} horas, {now.getMinutes()} minutos, {now.getSeconds()} segundos
                     <span style={{ marginLeft: 8, fontWeight: 'normal', fontSize: 14, color: '#aaa' }}>
-                      {now.toLocaleTimeString('pt-BR')}
+                      {/* {now.getHours()} horas, {now.getMinutes()} minutos, {now.getSeconds()} segundos */}
                     </span>
                   </div>
                 ) : (
